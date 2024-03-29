@@ -1,0 +1,7 @@
+target
+*.iml
+out
+gen
+lib
+.gradle
+
