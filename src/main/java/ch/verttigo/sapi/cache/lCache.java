@@ -25,6 +25,8 @@ public class lCache {
     }
 
     //TODO - Is it better to update only the cache present or take any update from the network ?
+    //If I have 10 lobby but a 100 game server, the 100 server does not need the update because they will not live long enough to use that data.
+    //So no, Asking 110 server to update a cache for a potential spread of 10, not worth it.
     private static Boolean hasUC(UUID uuid) {
         return localCache.getIfPresent(uuid) != null;
     }
