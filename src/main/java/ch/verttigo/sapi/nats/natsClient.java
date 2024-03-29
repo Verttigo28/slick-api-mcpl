@@ -1,5 +1,6 @@
 package ch.verttigo.sapi.nats;
 
+import ch.verttigo.sapi.SAPI;
 import io.nats.client.Connection;
 import io.nats.client.Nats;
 
@@ -11,7 +12,7 @@ public class natsClient {
 
     public static void connectNats() {
         try {
-            Nats.connect("nats://localhost:4222");
+            Nats.connect(SAPI.getInstance().getConfig().getString("nats.url"));
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
