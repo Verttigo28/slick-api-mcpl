@@ -295,7 +295,7 @@ public abstract class CustomInventory {
 
     public void addSpecialCategorieItem(int categorie, int slot, int main_categorie, ItemCreator item) {
         this.addSpecialCategorieItem(categorie, slot, main_categorie, item,
-                ChatColor.GREEN + "" + ChatColor.BOLD + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie");
+                ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie");
     }
 
     public void addCategorieItem(int categorie, int slot, ItemCreator item, String selected, String selection) {
@@ -324,7 +324,7 @@ public abstract class CustomInventory {
     }
 
     public void addCategorieItem(int categorie, int slot, ItemCreator item) {
-        this.addCategorieItem(categorie, slot, item, ChatColor.GREEN + "" + ChatColor.BOLD + "Sélectionnée",
+        this.addCategorieItem(categorie, slot, item, ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Sélectionnée",
                 ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie");
     }
 
@@ -355,7 +355,7 @@ public abstract class CustomInventory {
 
     public void addCategorieItemWithSize(int categorie, int slot, int lines, ItemCreator item) {
         this.addCategorieItemWithSize(categorie, slot, lines, item,
-                ChatColor.GREEN + "" + ChatColor.BOLD + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie");
+                ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie");
     }
 
     public void addPageCategorieItemWithSize(List<Integer> categories, int slot, int lines, ItemCreator item, String selected, String selection, String next_page, String previous_page) {
@@ -422,7 +422,7 @@ public abstract class CustomInventory {
 
     public void addPageCategorieItemWithSize(List<Integer> categories, int slot, int lines, ItemCreator item) {
         this.addPageCategorieItemWithSize(categories, slot, lines, item,
-                ChatColor.GREEN + "" + ChatColor.BOLD + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie",
+                ChatColor.GREEN + String.valueOf(ChatColor.BOLD) + "Sélectionnée", ChatColor.DARK_GRAY + "»" + ChatColor.WHITE + " Sélectionner cette catégorie",
                 ChatColor.YELLOW + "Clic-Gauche: " + ChatColor.WHITE + "Aller à la page suivante", ChatColor.YELLOW + "Clic-Droite: " + ChatColor.WHITE + "Aller à la page précédente");
     }
 

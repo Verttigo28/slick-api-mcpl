@@ -1,7 +1,6 @@
 package ch.verttigo.sapi.rest;
 
 import ch.verttigo.sapi.SAPI;
-import ch.verttigo.sapi.cache.lCache;
 import ch.verttigo.sapi.utils.HTTPUtils;
 import ch.verttigo.sapi.utils.Pair;
 import org.bukkit.Bukkit;
@@ -14,7 +13,6 @@ import static ch.verttigo.sapi.cache.lCache.localCache;
 
 public class ReqUser {
 
-    //TODO Get key from config
     public static JSONObject getUser(UUID uuid, Boolean createIfNull) {
         String path = SAPI.getInstance().getConfig().get("API.url") + "/user?uuid=" + uuid;
 
@@ -34,7 +32,6 @@ public class ReqUser {
     }
 
     public static JSONObject createUser(Player user) {
-        String key = null;
         String path = "/user/create";
         JSONObject obj = new JSONObject();
 

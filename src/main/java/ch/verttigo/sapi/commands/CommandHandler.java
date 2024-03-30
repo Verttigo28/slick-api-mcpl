@@ -97,9 +97,7 @@ public class CommandHandler implements CommandExecutor {
                         }
                     }
 
-                    if (sender instanceof Player) {
-
-                        Player player = (Player) sender;
+                    if (sender instanceof Player player) {
 
                         if (!player.hasPermission(annotation.getPermission())) {
                             resultHandler.handleResult(CommandResult.NO_PERMISSION, sender, wrapper);
