@@ -1,5 +1,6 @@
 package ch.verttigo.sapi.utils;
 
+import ch.verttigo.sapi.SAPI;
 import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,6 +15,7 @@ public class HTTPUtils {
 
     public static Pair<Integer, JSONObject> postRequest(String key, String path, JSONObject jsonObject) {
         CloseableHttpClient client = HttpClients.createDefault();
+        path += "&serverUUID=" + SAPI.getUUID() ;
         HttpPost httpPost = new HttpPost(path);
         int statusCode = 404;
         JSONObject result = null;
@@ -39,6 +41,7 @@ public class HTTPUtils {
 
     public static Pair<Integer, JSONObject> getRequest(String key, String path) {
         CloseableHttpClient client = HttpClients.createDefault();
+        path += "&serverUUID=" + SAPI.getUUID() ;
         HttpGet httpGet = new HttpGet(path);
         int statusCode = 0;
         JSONObject result = null;
@@ -60,6 +63,7 @@ public class HTTPUtils {
 
     public static boolean deleteRequest(String key, String path) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
+        path += "&serverUUID=" + SAPI.getUUID() ;
         HttpDelete httpDelete = new HttpDelete(path);
 
         httpDelete.addHeader("Authorization", key);

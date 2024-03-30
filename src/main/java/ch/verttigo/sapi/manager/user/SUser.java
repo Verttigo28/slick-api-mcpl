@@ -1,6 +1,7 @@
 package ch.verttigo.sapi.manager.user;
 
 import ch.verttigo.sapi.cache.lCache;
+import ch.verttigo.sapi.rest.ReqUser;
 import org.json.JSONObject;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class SUser {
     private final int group;
     private final int exp;
     private final int token;
-    private final int coins;
+    private int coins;
     private final int totalPlayTime;
     private final Date lastLogon;
 
@@ -24,14 +25,14 @@ public class SUser {
         JSONObject data = lCache.getUser(uuid);
         this.uuid = uuid;
         this.Nickname = data.get("Nickname").toString();
-        this.paidAccount = (boolean) data.get("paidAccount");
-        this.firstLogon = (Date) data.get("firstLogon");
-        this.lastLogon = (Date) data.get("lastLogon");
-        this.totalPlayTime = (int) data.get("totalPlayTime");
-        this.coins = (int) data.get("totalPlayTime");
-        this.token = (int) data.get("totalPlayTime");
-        this.exp = (int) data.get("totalPlayTime");
-        this.group = (int) data.get("totalPlayTime");
+        this.paidAccount = data.getBoolean("paidAccount");
+        this.firstLogon = null;
+        this.lastLogon = null;
+        this.totalPlayTime = 0;
+        this.coins = data.getInt("Coins");
+        this.token = data.getInt("Tokens");
+        this.exp = data.getInt("EXP");
+        this.group = data.getInt("Group");
         this.specialPerms = null;
         this.friends = null;
     }
@@ -76,11 +77,17 @@ public class SUser {
         return token;
     }
 
-    public double getCoins() {
+    public int getCoins() {
         return coins;
     }
 
-    public void setCoins(Double amount) {
+    public Boolean setCoins(int amount) {
+        JSONObject obj = ReqUser.updateUser(uuid, new JSONObject().put("Coins", amount));
+        if (obj != null) {
+            coins = obj.getInt("Coins");
+            return true;
+        }
+        return false;
     }
 
     public int getTotalPlayTime() {

@@ -1,2 +1,5 @@
 nats:
-  url: "nats://localhost:4222"
+  url: "nats://127.0.0.1:4222"
+API:
+  url: "http://127.0.0.1:3000"
+  auth: "token"

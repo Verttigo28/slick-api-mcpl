@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ch.verttigo.sapi.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ch.verttigo.sapi.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sapi.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sapi.main.iml" />
     </modules>
   </component>

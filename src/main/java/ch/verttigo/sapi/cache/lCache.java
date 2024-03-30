@@ -1,8 +1,10 @@
 package ch.verttigo.sapi.cache;
 
+import ch.verttigo.sapi.SAPI;
 import ch.verttigo.sapi.rest.ReqUser;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
+import org.bukkit.Bukkit;
 import org.json.JSONObject;
 
 import java.time.Duration;
@@ -17,7 +19,7 @@ public class lCache {
     }
 
     public static void setUser(UUID uuid, JSONObject obj) {
-        if (hasUC(uuid)) {
+        if (hasUC(uuid) && obj.get("serverUUID") != SAPI.getUUID().toString()) {
             //TODO is there a better way ?
             localCache.invalidate(uuid);
             localCache.put(uuid, obj);

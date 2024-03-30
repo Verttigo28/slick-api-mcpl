@@ -1,5 +1,7 @@
 package ch.verttigo.sapi.rest;
 
+import ch.verttigo.sapi.SAPI;
+import ch.verttigo.sapi.cache.lCache;
 import ch.verttigo.sapi.utils.HTTPUtils;
 import ch.verttigo.sapi.utils.Pair;
 import org.bukkit.Bukkit;
@@ -12,13 +14,13 @@ public class ReqUser {
 
     //TODO Get key from config
     public static JSONObject getUser(UUID uuid, Boolean createIfNull) {
-        String key = null;
-        String path = "/user?uuid=" + uuid;
+        String key = "token";
+        String path = SAPI.getInstance().getConfig().get("API.url") + "/user?uuid=" + uuid;
 
         if (createIfNull) {
             //TODO rewrite this part
             String nick = (Bukkit.getPlayer(uuid).getDisplayName() != null) ? Bukkit.getPlayer(uuid).getDisplayName() : "Aie";
-            path += "&createIfNull=true&=nickname=" + nick + "&paidAccount=true";
+            path += "&createIfNull=true&Nickname=" + nick + "&paidAccount=true";
         }
 
         Pair<Integer, JSONObject> response = HTTPUtils.getRequest(key, path);
@@ -51,14 +53,16 @@ public class ReqUser {
     }
 
     public static JSONObject updateUser(UUID uuid, JSONObject modifiedData) {
-        String key = null;
-        String path = "/user/update/?uuid=" + uuid;
+        // String key = SAPI.getInstance().getConfig().getString("API.auth");
+        String key = "token";
+        String path = SAPI.getInstance().getConfig().get("API.url") + "/user/update/?uuid=" + uuid;
 
         Pair<Integer, JSONObject> response = HTTPUtils.postRequest(key, path, modifiedData);
         if (response.getLeft() != 200) {
             System.out.println("There was an error updating the user..");
             return null;
         } else {
+            lCache.setUser(uuid, response.getRight());
             return response.getRight();
         }
 

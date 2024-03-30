@@ -14,12 +14,13 @@ public class ReplaceUC {
         Dispatcher d = natsClient.getNats().createDispatcher((data) -> {
             String str = new String(data.getData(), StandardCharsets.UTF_8);
             JSONObject obj = new JSONObject(str);
-            updateUC(obj);
+            UUID uuid = UUID.fromString(obj.getString("UUID"));
+            updateUC(uuid, obj);
         });
         d.subscribe("RUC");
     }
 
-    private static void updateUC(JSONObject obj) {
-        lCache.setUser(UUID.fromString(obj.get("uuid").toString()),obj);
+    private static void updateUC(UUID uuid, JSONObject obj) {
+        lCache.setUser(uuid, obj);
     }
 }

@@ -3,17 +3,13 @@ package ch.verttigo.sapi;
 
 import ch.verttigo.sapi.commands.AdminCommands;
 import ch.verttigo.sapi.commands.CommandHandler;
-import ch.verttigo.sapi.economy.EconomyService;
 import ch.verttigo.sapi.listeners.PlayerLoginQuitEvent;
-import net.milkbowl.vault.economy.Economy;
+import ch.verttigo.sapi.nats.natsClient;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
+import java.util.UUID;
 
 public class SAPI extends JavaPlugin {
     private static SAPI instance;
@@ -22,42 +18,36 @@ public class SAPI extends JavaPlugin {
     public static SAPI getInstance() {
         return instance;
     }
-    private String prefix;
-    private File configFile;
+
+    public static String getPrefix() {
+        return prefix;
+    }
+
+    public static UUID getUUID() {
+        return uuid;
+    }
+
+    private static String prefix;
+    private static UUID uuid;
+
     @Override
     public void onLoad() {
         instance = this;
         prefix = "§c§lSlick§b§lAPI §8➟ §f";
-        configFile = new File(getDataFolder(), "config.yml");
+        uuid = UUID.randomUUID();
     }
 
     @Override
     public void onEnable() {
         instance = this;
 
-        if(!configFile.exists()) {
-            try(InputStream in = this.getResource("config.yml")) {
-                Files.copy(in, configFile.toPath());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        this.saveDefaultConfig();
 
-            getLogger().severe("----[!] CONFIG.YML NOT CONFIGURED!----");
-            getPluginLoader().disablePlugin(this);
-            return;
-        }
-
-        try {
-            getConfig().load(configFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        natsClient.connectNats();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerLoginQuitEvent(), this);
-        server.getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
+        //   server.getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
 
     }
 

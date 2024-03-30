@@ -55,7 +55,7 @@ public class EconomyService implements Economy {
         if (deduct >= 0.0) {
             return new EconomyResponse(0.0D, su.getCoins(), ResponseType.FAILURE, "The value is more than the player's balance!");
         } else {
-            su.setCoins(deduct);
+            su.setCoins((int) deduct);
             return new EconomyResponse(amount, su.getCoins(), ResponseType.SUCCESS, "");
         }
     }
@@ -63,7 +63,7 @@ public class EconomyService implements Economy {
 
     public EconomyResponse depositPlayer(UUID uuid, double amount) {
         SUser su = new SUser(uuid);
-        su.setCoins(su.getCoins() + amount);
+        su.setCoins((int) (su.getCoins() + amount));
         return new EconomyResponse(amount, 0.0D, ResponseType.SUCCESS, "");
     }
 

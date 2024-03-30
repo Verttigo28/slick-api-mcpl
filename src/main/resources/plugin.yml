@@ -1,5 +1,5 @@
 name: SAPI-Spigot
-version: '${version}'
+version: 1.0
 main: ch.verttigo.sapi.SAPI
 load: STARTUP
-softdepend: [Vault]
+#softdepend: [Vault]
