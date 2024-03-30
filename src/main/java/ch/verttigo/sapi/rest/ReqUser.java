@@ -10,6 +10,8 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
+import static ch.verttigo.sapi.cache.lCache.localCache;
+
 public class ReqUser {
 
     //TODO Get key from config
@@ -62,7 +64,8 @@ public class ReqUser {
             System.out.println("There was an error updating the user..");
             return null;
         } else {
-            lCache.setUser(uuid, response.getRight());
+            localCache.invalidate(uuid);
+            localCache.put(uuid, response.getRight());
             return response.getRight();
         }
 
