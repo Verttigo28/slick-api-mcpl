@@ -16,7 +16,6 @@ public class ReqUser {
 
     //TODO Get key from config
     public static JSONObject getUser(UUID uuid, Boolean createIfNull) {
-        String key = "token";
         String path = SAPI.getInstance().getConfig().get("API.url") + "/user?uuid=" + uuid;
 
         if (createIfNull) {
@@ -25,7 +24,7 @@ public class ReqUser {
             path += "&createIfNull=true&Nickname=" + nick + "&paidAccount=true";
         }
 
-        Pair<Integer, JSONObject> response = HTTPUtils.getRequest(key, path);
+        Pair<Integer, JSONObject> response = HTTPUtils.getRequest(path);
         if (response.getLeft() != 200) {
             System.out.println("There was an error getting the user..");
             return null;
@@ -44,7 +43,7 @@ public class ReqUser {
         //TODO Need a utils to check if the player'account is premium
         obj.put("paidAccount", true);
 
-        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(key, path, obj);
+        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(path, obj);
         if (response.getLeft() != 200) {
             System.out.println("There was an error creating the user..");
             return null;
@@ -55,11 +54,9 @@ public class ReqUser {
     }
 
     public static JSONObject updateUser(UUID uuid, JSONObject modifiedData) {
-        // String key = SAPI.getInstance().getConfig().getString("API.auth");
-        String key = "token";
         String path = SAPI.getInstance().getConfig().get("API.url") + "/user/update/?uuid=" + uuid;
 
-        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(key, path, modifiedData);
+        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(path, modifiedData);
         if (response.getLeft() != 200) {
             System.out.println("There was an error updating the user..");
             return null;

@@ -9,13 +9,13 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class HTTPUtils {
 
-    public static Pair<Integer, JSONObject> postRequest(String key, String path, JSONObject jsonObject) {
+    public static Pair<Integer, JSONObject> postRequest(String path, JSONObject jsonObject) {
+        String key = SAPI.getInstance().getConfig().getString("API.auth");
         CloseableHttpClient client = HttpClients.createDefault();
-        path += "&serverUUID=" + SAPI.getUUID() ;
+        path += "&serverUUID=" + SAPI.getUUID();
         HttpPost httpPost = new HttpPost(path);
         int statusCode = 404;
         JSONObject result = null;
@@ -39,9 +39,10 @@ public class HTTPUtils {
         return new Pair<>(statusCode, result);
     }
 
-    public static Pair<Integer, JSONObject> getRequest(String key, String path) {
+    public static Pair<Integer, JSONObject> getRequest(String path) {
+        String key = SAPI.getInstance().getConfig().getString("API.auth");
         CloseableHttpClient client = HttpClients.createDefault();
-        path += "&serverUUID=" + SAPI.getUUID() ;
+        path += "&serverUUID=" + SAPI.getUUID();
         HttpGet httpGet = new HttpGet(path);
         int statusCode = 0;
         JSONObject result = null;
@@ -61,9 +62,10 @@ public class HTTPUtils {
         return new Pair<>(statusCode, result);
     }
 
-    public static boolean deleteRequest(String key, String path) throws IOException {
+    public static boolean deleteRequest(String path) throws IOException {
+        String key = SAPI.getInstance().getConfig().getString("API.auth");
         CloseableHttpClient client = HttpClients.createDefault();
-        path += "&serverUUID=" + SAPI.getUUID() ;
+        path += "&serverUUID=" + SAPI.getUUID();
         HttpDelete httpDelete = new HttpDelete(path);
 
         httpDelete.addHeader("Authorization", key);
@@ -76,7 +78,8 @@ public class HTTPUtils {
 
     }
 
-    public static boolean putRequest(String key, String path) throws IOException {
+    public static boolean putRequest(String path) throws IOException {
+        String key = SAPI.getInstance().getConfig().getString("API.auth");
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPut HttpPut = new HttpPut(path);
 
