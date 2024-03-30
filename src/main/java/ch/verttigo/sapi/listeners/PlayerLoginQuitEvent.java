@@ -1,13 +1,11 @@
 package ch.verttigo.sapi.listeners;
 
 import ch.verttigo.sapi.SAPI;
-import ch.verttigo.sapi.cache.lCache;
 import ch.verttigo.sapi.manager.user.SUser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -31,7 +29,6 @@ public class PlayerLoginQuitEvent implements Listener {
         } else {
             p.sendMessage("Error :(");
         }
-
 
     }
 }

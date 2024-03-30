@@ -6,10 +6,12 @@
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.nats/jnats/2.17.4/abe5dd94ee312c79b72c2d52b0b98afe71070fc7/jnats-2.17.4.jar" path-in-jar="/" />
       <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20240303/ebb88e8fb5122b7506d5cf1d69f1ccdb790d22a/json-20240303.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpclient/4.5.14/1194890e6f56ec29177673f2f12d0b8e627dec98/httpclient-4.5.14.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents/httpcore/4.4.16/51cf043c87253c9f58b539c9f7e44c8894223850/httpcore-4.4.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" path-in-jar="/" />
       <element id="module-output" name="ch.verttigo.sapi.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents.client5/httpclient5/5.3.1/56b53c8f4bcdaada801d311cf2ff8a24d6d96883/httpclient5-5.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents.core5/httpcore5/5.2.4/34d8332b975f9e9a8298efe4c883ec43d45b7059/httpcore5-5.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.36/6c62681a2f655b49963a5983b8b0950a6120ae14/slf4j-api-1.7.36.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.httpcomponents.core5/httpcore5-h2/5.2.4/2872764df7b4857549e2880dd32a6f9009166289/httpcore5-h2-5.2.4.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
