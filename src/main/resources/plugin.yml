@@ -3,3 +3,6 @@ version: 1.0
 main: ch.verttigo.sapi.SAPI
 load: STARTUP
 #softdepend: [Vault]
+commands:
+  coins:
+    description: Handle a user's coins

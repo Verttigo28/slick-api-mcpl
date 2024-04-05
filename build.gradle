@@ -19,16 +19,19 @@ repositories {
         name = "sonatype"
         url "https://oss.sonatype.org/content/repositories/releases"
     }
+    maven { url "https://repo.papermc.io/repository/maven-public/" }
     maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    compileOnly "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.3.1'
-    implementation  'org.json:json:20240303'
-    implementation  'io.nats:jnats:2.17.4'
-    implementation  'com.github.ben-manes.caffeine:caffeine:3.1.8'
+    implementation 'org.json:json:20240303'
+    implementation 'io.nats:jnats:2.17.4'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
+    implementation 'me.catcoder:bukkit-sidebar:6.2.6-SNAPSHOT'
+    implementation "net.kyori:adventure-api:4.16.0"
 }
 
 def targetJavaVersion = 17

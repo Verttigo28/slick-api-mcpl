@@ -1,7 +1,8 @@
 package ch.verttigo.sapi.rest;
 
 import ch.verttigo.sapi.SAPI;
-import ch.verttigo.sapi.utils.HTTPUtils;
+import ch.verttigo.sapi.utils.HTTP;
+import ch.verttigo.sapi.utils.Logger;
 import ch.verttigo.sapi.utils.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,6 +11,7 @@ import org.json.JSONObject;
 import java.util.UUID;
 
 import static ch.verttigo.sapi.cache.lCache.localCache;
+import static ch.verttigo.sapi.utils.Logger.log;
 
 public class ReqUser {
 
@@ -22,9 +24,9 @@ public class ReqUser {
             path += "&createIfNull=true&Nickname=" + nick + "&paidAccount=true";
         }
 
-        Pair<Integer, JSONObject> response = HTTPUtils.getRequest(path);
+        Pair<Integer, JSONObject> response = HTTP.getRequest(path);
         if (response.getLeft() != 200) {
-            System.out.println("There was an error getting the user..");
+            log(Logger.LogType.severe, "REST server return the error code " + response.getLeft() + ", check REST server log");
             return null;
         } else {
             return response.getRight();
@@ -40,9 +42,9 @@ public class ReqUser {
         //TODO Need a utils to check if the player'account is premium
         obj.put("paidAccount", true);
 
-        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(path, obj);
+        Pair<Integer, JSONObject> response = HTTP.postRequest(path, obj);
         if (response.getLeft() != 200) {
-            System.out.println("There was an error creating the user..");
+            log(Logger.LogType.severe, "REST server return the error code " + response.getLeft() + ", check REST server log");
             return null;
         } else {
             return response.getRight();
@@ -53,9 +55,9 @@ public class ReqUser {
     public static JSONObject updateUser(UUID uuid, JSONObject modifiedData) {
         String path = SAPI.getInstance().getConfig().get("API.url") + "/user/update/?uuid=" + uuid;
 
-        Pair<Integer, JSONObject> response = HTTPUtils.postRequest(path, modifiedData);
+        Pair<Integer, JSONObject> response = HTTP.postRequest(path, modifiedData);
         if (response.getLeft() != 200) {
-            System.out.println("There was an error updating the user..");
+            log(Logger.LogType.severe, "REST server return the error code " + response.getLeft() + ", check REST server log");
             return null;
         } else {
             localCache.invalidate(uuid);

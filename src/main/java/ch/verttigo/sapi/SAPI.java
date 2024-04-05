@@ -3,17 +3,22 @@ package ch.verttigo.sapi;
 
 import ch.verttigo.sapi.commands.AdminCommands;
 import ch.verttigo.sapi.commands.CommandHandler;
+import ch.verttigo.sapi.economy.EconomyService;
 import ch.verttigo.sapi.listeners.PlayerLoginQuitEvent;
-import ch.verttigo.sapi.nats.natsClient;
-import org.bukkit.Server;
+import ch.verttigo.sapi.nats.NatsClient;
+import ch.verttigo.sapi.sbcTest.sbManager;
+import ch.verttigo.sapi.utils.Logger;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
+import static ch.verttigo.sapi.utils.Logger.log;
+
 public class SAPI extends JavaPlugin {
     private static SAPI instance;
-    private final Server server = getServer();
 
     public static SAPI getInstance() {
         return instance;
@@ -39,21 +44,27 @@ public class SAPI extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        log(Logger.LogType.info, "Stating SAPI");
         instance = this;
 
         this.saveDefaultConfig();
 
-        natsClient.connectNats();
+        NatsClient.connectNats();
+
+        registerCommands();
+
+        sbManager.createScoreboard();
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerLoginQuitEvent(), this);
-        //   server.getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
+        this.getServer().getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
 
     }
 
+
     @Override
     public void onDisable() {
-
+        log(Logger.LogType.info, "Disabling SAPI");
     }
 
     private void registerCommands() {

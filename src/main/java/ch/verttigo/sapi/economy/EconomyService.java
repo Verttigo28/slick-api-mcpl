@@ -8,7 +8,6 @@ import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 import org.bukkit.OfflinePlayer;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class EconomyService implements Economy {

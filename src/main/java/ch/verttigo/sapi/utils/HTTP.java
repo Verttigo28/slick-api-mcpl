@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-public class HTTPUtils {
+public class HTTP {
 
     public static Pair<Integer, JSONObject> postRequest(String path, JSONObject jsonObject) {
         String key = SAPI.getInstance().getConfig().getString("API.auth");

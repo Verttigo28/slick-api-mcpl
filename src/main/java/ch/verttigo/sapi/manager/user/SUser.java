@@ -24,7 +24,7 @@ public class SUser {
     public SUser(UUID uuid) {
         JSONObject data = lCache.getUser(uuid);
         this.uuid = uuid;
-        this.Nickname = data.get("Nickname").toString();
+        this.Nickname = data.getString("Nickname");
         this.paidAccount = data.getBoolean("paidAccount");
         this.firstLogon = null;
         this.lastLogon = null;

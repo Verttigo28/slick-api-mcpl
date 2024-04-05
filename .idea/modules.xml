@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ch.verttigo.sapi.main.iml" filepath="$PROJECT_DIR$/.idea/modules/ch.verttigo.sapi.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sapi.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sapi.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sapi.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sapi.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slick-api-mcpl.sapi.main.iml" filepath="$PROJECT_DIR$/.idea/modules/slick-api-mcpl.sapi.main.iml" />
     </modules>
   </component>
 </project>
