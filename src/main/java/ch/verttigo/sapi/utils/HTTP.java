@@ -15,6 +15,21 @@ import java.util.concurrent.Future;
 
 public class HTTP {
 
+    // HTTP client should be created once and reused
+    private static final CloseableHttpAsyncClient client;
+
+    static {
+        client = HttpAsyncClients.createDefault();
+        client.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                client.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
+    }
+
     public static Pair<Integer, JSONObject> postRequest(String path, JSONObject jsonObject) {
         String key = SAPI.getInstance().getConfig().getString("API.auth");
         path += "&serverUUID=" + SAPI.getUUID();
@@ -22,9 +37,6 @@ public class HTTP {
         int statusCode;
         JSONObject result;
 
-        //HTTP PART
-        CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
-        client.start();
         SimpleHttpRequest request = SimpleRequestBuilder.post(path)
                 .setBody(String.valueOf(jsonObject), ContentType.APPLICATION_JSON)
                 .addHeader("Accept", "application/json")
@@ -32,16 +44,16 @@ public class HTTP {
                 .addHeader("Authorization", key)
                 .build();
         try {
-
             Future<SimpleHttpResponse> future = client.execute(request, null);
             SimpleHttpResponse response = future.get();
             statusCode = response.getCode();
 
-            if (statusCode != 200 && statusCode != 201) return new Pair<>(statusCode, null);
+            if (statusCode != 200 && statusCode != 201) {
+                return new Pair<>(statusCode, null);
+            }
 
             result = new JSONObject(response.getBodyText());
-            client.close();
-        } catch (IOException | InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
         return new Pair<>(statusCode, result);
@@ -54,25 +66,21 @@ public class HTTP {
         int statusCode;
         JSONObject result;
 
-        //HTTP Part
-        CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
-        client.start();
         SimpleHttpRequest request = SimpleRequestBuilder.get(path)
                 .addHeader("Authorization", key)
                 .build();
-
         try {
             final Future<SimpleHttpResponse> future = client.execute(request, null);
             SimpleHttpResponse response = future.get();
 
             statusCode = response.getCode();
 
-            if (statusCode != 200) return new Pair<>(statusCode, null);
+            if (statusCode != 200) {
+                return new Pair<>(statusCode, null);
+            }
 
             result = new JSONObject(response.getBodyText());
-
-            client.close();
-        } catch (IOException | InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
         return new Pair<>(statusCode, result);

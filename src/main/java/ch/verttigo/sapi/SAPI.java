@@ -3,14 +3,11 @@ package ch.verttigo.sapi;
 
 import ch.verttigo.sapi.commands.AdminCommands;
 import ch.verttigo.sapi.commands.CommandHandler;
-import ch.verttigo.sapi.economy.EconomyService;
 import ch.verttigo.sapi.listeners.PlayerLoginQuitEvent;
 import ch.verttigo.sapi.nats.NatsClient;
 import ch.verttigo.sapi.sbcTest.sbManager;
 import ch.verttigo.sapi.utils.Logger;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
@@ -57,7 +54,7 @@ public class SAPI extends JavaPlugin {
 
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerLoginQuitEvent(), this);
-        this.getServer().getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
+        //this.getServer().getServicesManager().register(Economy.class, new EconomyService(), getInstance(), ServicePriority.High);
 
     }
 
